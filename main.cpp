@@ -24,7 +24,8 @@ using namespace android;
 bool mQuit = false;
 
 /*
- Android 系统支持多种显示设备，比如说，输出到手机屏幕，或者通过WiFi 投射到电视屏幕。Android用 DisplayDevice 类来表示这样的设备。
+ Android 系统支持多种显示设备，比如说，输出到手机屏幕，或者通过WiFi 投射到电视屏幕。
+ Android用 DisplayDevice 类来表示这样的设备。
  不是所有的 Layer 都会输出到所有的Display, 比如说，我们可以只将Video Layer投射到电视， 而非整个屏幕。
  LayerStack 就是为此设计，LayerStack 是一个Display 对象的一个数值，
  而类Layer里成员State结构体也有成员变量mLayerStack， 只有两者的mLayerStack 值相同，Layer才会被输出到给该Display设备。
@@ -77,14 +78,6 @@ int main(int argc, char ** argv) {
         ALOGD("SurfaceComposerClient::getActiveDisplayMode error: %#x\n", err);
         return -1;
     }
-        
-
-    ui::DisplayState displayState;
-    err = SurfaceComposerClient::getDisplayState(displayToken, &displayState);
-    if (err != OK) {
-        ALOGD("SurfaceComposerClient::getDisplayState error: %#x\n", err);
-        return -1;
-    }
     
     ui::Size resolution = displayMode.resolution; 
     //resolution = limitSurfaceSize(resolution.width, resolution.height);
@@ -104,7 +97,7 @@ int main(int argc, char ** argv) {
             .show(surfaceControl)
             .setBackgroundColor(surfaceControl, half3{0, 0, 0}, 1.0f, ui::Dataspace::UNKNOWN) // black background
             .setAlpha(surfaceControl, 1.0f)
-            .setLayerStack(surfaceControl, displayState.layerStack)
+            .setLayerStack(surfaceControl, mLayerStack)
             .apply();
 
 
