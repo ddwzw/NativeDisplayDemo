@@ -153,7 +153,6 @@ int main(int argc, char ** argv) {
         }
         
         // 3. queue the buffer to display
-        IGraphicBufferProducer::QueueBufferOutput qbOutput;
         IGraphicBufferProducer::QueueBufferInput input(systemTime(), true /* autotimestamp */,
                                                        HAL_DATASPACE_UNKNOWN, {},
                                                        NATIVE_WINDOW_SCALING_MODE_FREEZE, 0,
